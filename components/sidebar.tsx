@@ -2,6 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { Montserrat } from "next/font/google";
+
+import { cn } from "@/lib/utils";
+import { sidebaritems } from "./sidebaritems";
+
+//imported Navitems from sidebaritems.tsx
+const routes = sidebaritems
+//setting cn monserrat for extra font
+const monserrat = Montserrat({weight: '600', subsets:['latin']})
 
 const Sidebar = () => {
     return(
@@ -15,7 +24,28 @@ const Sidebar = () => {
                         src='/logo.png'
                     />
                 </div>
+                <h1  className={cn ("text-2xl font-bold", monserrat.className)}>
+                    AIOrchard
+                </h1>
             </Link>
+
+            {/* Sidebar Items */}
+            <div className="space-y-1">
+                {routes.map((route) => (
+                    <Link
+                    className="text-sm group flex p-3 w-full justify-start font-medium curser-pointer hover:text-white hover:bg-white/10 rounded-lg transition"
+                    href={route.href}
+                    key={route.href}
+                    >
+                        <div className="flex items-center flex-1">
+                            <route.icon className={cn("h-5 w-5 mr-3", route.color)}/>
+                            {route.label}
+                        </div>
+                    </Link>
+                ))}
+            </div>
+
+            
             </div>
         </div>
     )
