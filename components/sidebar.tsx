@@ -7,8 +7,10 @@ import { Montserrat } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { sidebaritems } from "./sidebaritems";
 
+
 //imported Navitems from sidebaritems.tsx
 const routes = sidebaritems
+
 //setting cn monserrat for extra font
 const monserrat = Montserrat({weight: '600', subsets:['latin']})
 
