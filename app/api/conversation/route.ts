@@ -55,7 +55,15 @@ export async function POST(req: Request) {
             presence_penalty: 0,
         });
 
-        return NextResponse.json(response);
+        const responseData = {
+            ...response,
+            choices: response.choices.map(choice => ({
+                ...choice,
+                role: 'system'
+            }))
+        };
+
+        return NextResponse.json(responseData);
     } catch (error) {
        console.log("[CONVERSTION_ERROR]", error);
        return new NextResponse("Internal Error", {status: 500});

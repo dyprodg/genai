@@ -14,6 +14,9 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Empty } from '@/components/empty';
 import { Loader } from '@/components/loader';
+import { cn } from '@/lib/utils';
+import { UserAvater } from '@/components/user-avater';
+import { BotAvatar } from '@/components/bot-avatar';
 
 
 const ConversationPage = () => {
@@ -22,7 +25,9 @@ const ConversationPage = () => {
 
     type MessageType ={
         content: string;
+        role: 'user' | 'system'; 
     }
+    
 
     const [messages, setMessages] = useState<MessageType[]>([]);
 
@@ -46,9 +51,13 @@ const ConversationPage = () => {
                 messages: newMessages,
             })
 
-            setMessages((current) => [...current, userMessage, { content: response.data.choices[0].message.content }]);
+            setMessages((current) => [
+                ...current, 
+                { content: values.prompt, role: 'user' }, 
+                { content: response.data.choices[0].message.content, role: response.data.choices[0].message.role }
+            ]);
 
-
+            console.log(response.data)
             form.reset();
 
 
@@ -62,15 +71,17 @@ const ConversationPage = () => {
 
     return (
         <div>
-            <Heading 
+            
+            <div className="p-4 lg:px-8">
+                {/* Form Comp */}
+                <div>
+                <Heading 
                 title='Conversation'
                 description='Our most advanced conversation.'
                 icon={MessageSquare}
                 iconColor='text-violet-500'
                 bgColor='bg-violet-500/10'
             />
-            <div className="p-4 lg:px-8">
-                <div>
                     <Form {...form}>
                         <form 
                         onSubmit={form.handleSubmit(onSubmit)}
@@ -97,7 +108,9 @@ const ConversationPage = () => {
                         </form>
                     </Form>
                 </div>
-                <div className='space-y-4 mt-4'>
+
+                {/* Chat comp */}
+                <div className='mt-8 space-y-4 w-full'>
                     {isLoading && (
                         <div className='p-8 rounded-lg w-full flex items-center justify-center bg-muted'>
                             <Loader />
@@ -105,17 +118,28 @@ const ConversationPage = () => {
                     )}
                     {messages.length === 0 && !isLoading && (
                         <Empty 
-                            label='No conversation started'
+                            label='No conversation started yet'
                         />
                     )}
                     <div className='flex flex-col-reverse gap-y-4'>
                         {messages.map((message) => (
-                            <div key={message.content}>
-                                {message.content}
+                            <div 
+                                key={message.content}
+                                className={cn(
+                                    'p-8 w-full flex items-start gap-x-8 rounded-lg',
+                                    message.role === 'user' ? 'bg-white border border-black/10' : 'bg-muted'
+                                )}
+                            >
+                                {message.role === 'user' ? <UserAvater /> : <BotAvatar />}
+                                <p className='text-sm flex-grow' style={{whiteSpace: 'pre-line'}}>
+                                    {message.content}
+                                </p>
+                                
                             </div>
                         ))}
                     </div>
                 </div>
+
             </div>
         </div>
     )
