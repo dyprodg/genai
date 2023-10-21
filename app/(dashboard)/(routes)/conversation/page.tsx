@@ -111,7 +111,7 @@ const ConversationPage = () => {
 
                 {/* Chat comp */}
                 <div className='mt-8 space-y-4 w-full'>
-                    {true && (
+                    {isLoading && (
                         <div className='p-8 rounded-lg w-full flex items-center justify-center bg-muted'>
                             <Loader />
                         </div>
