@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Empty } from '@/components/empty';
+import { Loader } from '@/components/loader';
 
 
 const ConversationPage = () => {
@@ -82,7 +83,7 @@ const ConversationPage = () => {
                                         <Input 
                                             className='border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent'
                                             disabled={isLoading}
-                                            placeholder='How do I calculate the radius of a circle?'
+                                            placeholder='Type your message here...'
                                             {...field}
                                         />
                                     </FormControl>
