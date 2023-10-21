@@ -25,7 +25,8 @@ const Sidebar = () => {
             <Link href={'/dashboard'} className="flex items-center pl-3 mb-14">
                 <div className="relative w-8 h-8 mr-4">
                     <Image 
-                        layout="fill"
+                        width={500}
+                        height={500}
                         alt="Logo"
                         src='/logo.png'
                     />

@@ -7,7 +7,8 @@ export const Loader = () => {
                 <Image 
                     className="rounded-full p-1"
                     alt="logo"
-                    layout="fill"
+                    width={500}
+                    height={500}
                     src='/logored.png'
                 />
             </div>

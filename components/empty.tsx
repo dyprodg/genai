@@ -12,8 +12,10 @@ export const Empty = ({label} : EmptyProps) => {
             <div className="relative h-72 w-72">
                 <Image 
                     alt="Empty"
-                    layout="fill"
+                    width={1000}
+                    height={1000}
                     src='/empty.png'
+                    priority
                 />
             </div>
         </div>
