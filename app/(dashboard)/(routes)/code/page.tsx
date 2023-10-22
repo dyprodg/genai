@@ -3,7 +3,7 @@
 import axios from 'axios';
 import * as z from 'zod';
 import { Heading } from "@/components/heading";
-import { MessageSquare } from "lucide-react";
+import { Code } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { formSchema } from './constants';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -17,6 +17,7 @@ import { Loader } from '@/components/loader';
 import { cn } from '@/lib/utils';
 import { UserAvater } from '@/components/user-avater';
 import { BotAvatar } from '@/components/bot-avatar';
+import ReactMarkdown from 'react-markdown'
 
 
 const CodePage = () => {
@@ -47,7 +48,7 @@ const CodePage = () => {
             };
             const newMessages = [...messages, userMessage];
 
-            const response = await axios.post('/api/conversation', {
+            const response = await axios.post('/api/code', {
                 messages: newMessages,
             })
 
@@ -76,10 +77,10 @@ const CodePage = () => {
                 {/* Form Comp */}
                 <div>
                 <Heading 
-                title='Conversation'
-                description='Our most advanced conversation.'
-                icon={MessageSquare}
-                iconColor='text-violet-500'
+                title='Code Generation'
+                description='Generate code using descriptive text'
+                icon={Code}
+                iconColor='text-green-500'
                 bgColor='bg-violet-500/10'
             />
                     <Form {...form}>
@@ -94,7 +95,7 @@ const CodePage = () => {
                                         <Input 
                                             className='border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent'
                                             disabled={isLoading}
-                                            placeholder='Type your message here...'
+                                            placeholder='Describe what your code should do here...'
                                             {...field}
                                         />
                                     </FormControl>
@@ -118,7 +119,8 @@ const CodePage = () => {
                     )}
                     {messages.length === 0 && !isLoading && (
                         <Empty 
-                            label='No conversation started yet'
+                            label='Waiting for your instructions'
+                            imagesource='/codegen.png'
                         />
                     )}
                     <div className='flex flex-col-reverse gap-y-4'>
@@ -131,9 +133,21 @@ const CodePage = () => {
                                 )}
                             >
                                 {message.role === 'user' ? <UserAvater /> : <BotAvatar />}
-                                <p className='text-sm flex-grow' style={{whiteSpace: 'pre-line'}}>
-                                    {message.content}
-                                </p>
+                                <ReactMarkdown 
+                                className='text-sm overflow-hidden leading-7'
+                                components={{
+                                    pre: ({node, ...props}) => (
+                                        <div className='overflow-auto w-full my-2 bg-black/10 p-2 rounded-lg'>
+                                            <pre {...props} />
+                                        </div>
+                                    ),
+                                    code: ({ node, ...props }) => (
+                                        <code className='bg-black/10 rounded-lg p-1' {...props} />
+                                    )
+                                }}
+                                >
+                                    {message.content || '' }
+                                </ReactMarkdown>
                                 
                             </div>
                         ))}

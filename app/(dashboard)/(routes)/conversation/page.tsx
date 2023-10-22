@@ -77,7 +77,7 @@ const ConversationPage = () => {
                 <div>
                 <Heading 
                 title='Conversation'
-                description='Our most advanced conversation.'
+                description='Our most advanced text generation AI'
                 icon={MessageSquare}
                 iconColor='text-violet-500'
                 bgColor='bg-violet-500/10'
@@ -119,6 +119,7 @@ const ConversationPage = () => {
                     {messages.length === 0 && !isLoading && (
                         <Empty 
                             label='No conversation started yet'
+                            imagesource='/empty.png'
                         />
                     )}
                     <div className='flex flex-col-reverse gap-y-4'>
