@@ -36,7 +36,7 @@ export async function POST(req: Request) {
         const transformedMessages: { role: 'system' | 'user', content: string }[] = [
             {
                 role: 'system',
-                content: 'Start a conversation with GPT-3.5-turbo'
+                content: 'You are a conversation bot and will provide me with anything i will ask for and chat with me'
             },
             ...messages.map(message => ({
                 role: 'user' as 'user',
@@ -48,9 +48,9 @@ export async function POST(req: Request) {
         const response = await openai.chat.completions.create({
             model: 'gpt-3.5-turbo',
             messages: transformedMessages,
-            temperature: 0,
+            temperature: 0.7,
             max_tokens: 1024,
-            top_p: 1,
+            top_p: 0.8,
             frequency_penalty: 0,
             presence_penalty: 0,
         });
