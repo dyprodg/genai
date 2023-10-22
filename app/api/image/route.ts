@@ -2,13 +2,9 @@ import { auth } from '@clerk/nextjs';
 import { NextResponse } from 'next/server';
 import { OpenAI } from 'openai';
 
-interface Message {
-    content: string;
-}
 
-interface RequestBody {
-    messages: Message[];
-}
+
+
 
 export async function POST(req: Request) {
     
@@ -18,7 +14,7 @@ export async function POST(req: Request) {
 
     try {
         const { userId } = auth();
-        const body: RequestBody = await req.json();
+        const body = await req.json();
         const { prompt, amount = 1, resolution = '512x512' } = body;
 
         if(!userId) {
