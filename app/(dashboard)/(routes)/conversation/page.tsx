@@ -56,11 +56,7 @@ const ConversationPage = () => {
                 { content: values.prompt, role: 'user' }, 
                 { content: response.data.choices[0].message.content, role: response.data.choices[0].message.role }
             ]);
-
-            console.log(response.data)
             form.reset();
-
-
         } catch (error: any) {
             //Todo: open pro model
             console.log(error)
