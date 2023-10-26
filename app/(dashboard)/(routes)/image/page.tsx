@@ -49,8 +49,9 @@ const ImageGenerationPage = () => {
             setImages([])
             const response = await axios.post('/api/image', values)
 
-            const urls = response.data.map((image: {url: string}) => image.url)
-
+            const urls = response.data
+            console.log(urls)
+            console.log(response)
             setImages(urls);
             form.reset();
         } catch (error: any) {
