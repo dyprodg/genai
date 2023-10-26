@@ -4,7 +4,6 @@ import Replicate from "replicate";
 
 
 
-
 export async function POST(req: Request) {
     
     const replicate = new Replicate({
@@ -14,10 +13,7 @@ export async function POST(req: Request) {
     try {
         const { userId } = auth();
         const body = await req.json();
-        const { prompt, amount = 1, resolution = '512x512' } = body;
-
-        console.log(prompt)
-        console.log(amount)
+        const { prompt, amount = 1 } = body;
 
         if(!userId) {
             return new NextResponse('Unauthorized', { status: 401});
@@ -33,9 +29,6 @@ export async function POST(req: Request) {
         if(!amount) {
             return new NextResponse('amount is required', {status: 400});
         }
-        if(!resolution) {
-            return new NextResponse('resolution is required', {status: 400});
-        }
 
         const output = await replicate.run(
             "stability-ai/sdxl:c221b2b8ef527988fb59bf24a8b97c4561f1c671f73bd389f866bfb27c061316",
@@ -46,8 +39,6 @@ export async function POST(req: Request) {
               }
             }
           );
-
-       
 
         return NextResponse.json(output);
     } catch (error) {

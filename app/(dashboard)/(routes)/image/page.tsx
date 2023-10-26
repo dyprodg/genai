@@ -6,7 +6,7 @@ import { Heading } from "@/components/heading";
 import Image from "next/image";
 import { ImageIcon } from 'lucide-react';
 import { useForm } from "react-hook-form";
-import { amountOptions, formSchema, resolutionOptions } from './constants';
+import { amountOptions, formSchema } from './constants';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
@@ -27,18 +27,11 @@ const ImageGenerationPage = () => {
 
     const [images, setImages] = useState<string[]>([]);
 
-    type MessageType ={
-        content: string;
-        role: 'user' | 'system'; 
-    }
-    
-
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             prompt: '',
             amount: '1',
-            resolution: '512x512'
         }
     })
 
@@ -50,8 +43,7 @@ const ImageGenerationPage = () => {
             const response = await axios.post('/api/image', values)
 
             const urls = response.data
-            console.log(urls)
-            console.log(response)
+            
             setImages(urls);
             form.reset();
         } catch (error: any) {
@@ -115,40 +107,6 @@ const ImageGenerationPage = () => {
                                             </FormControl>
                                             <SelectContent>
                                                 {amountOptions.map((option) => (
-                                                    <SelectItem
-                                                        key={option.value}
-                                                        value={option.value}
-                                                    >
-                                                        {option.label}
-                                                    </SelectItem>
-                                                ))}
-                                            </SelectContent>
-                                        </Select>
-                                    </FormItem>
-                                )}
-                            />
-
-                            {/* Resoltion Option Selection */}
-                            <FormField
-                                name='resolution'
-                                control={form.control}
-                                render={({field }) => (
-                                    <FormItem className='col-span-12 lg:col-span-2'>
-                                        <Select
-                                            disabled={isLoading}
-                                            onValueChange={field.onChange}
-                                            value={field.value}
-                                            defaultValue={field.value}
-                                        >
-                                            <FormControl>
-                                                <SelectTrigger>
-                                                    <SelectValue
-                                                        defaultValue={field.value}
-                                                    />
-                                                </SelectTrigger>
-                                            </FormControl>
-                                            <SelectContent>
-                                                {resolutionOptions.map((option) => (
                                                     <SelectItem
                                                         key={option.value}
                                                         value={option.value}
