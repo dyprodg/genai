@@ -1,7 +1,7 @@
 import { auth } from '@clerk/nextjs';
 import { NextResponse } from 'next/server';
 import Replicate from "replicate";
-
+import { checkApiLimit, increaseApiLimit  } from '@/lib/api-limit';
 
 
 export async function POST(req: Request) {
@@ -30,6 +30,12 @@ export async function POST(req: Request) {
             return new NextResponse('amount is required', {status: 400});
         }
 
+        const freeTrail = await checkApiLimit();
+
+        if (!freeTrail){
+            return new NextResponse('Free trail has expired.', { status: 403})
+        }
+
         const output = await replicate.run(
             "stability-ai/sdxl:c221b2b8ef527988fb59bf24a8b97c4561f1c671f73bd389f866bfb27c061316",
             {
@@ -39,7 +45,8 @@ export async function POST(req: Request) {
               }
             }
           );
-
+        await increaseApiLimit();
+        
         return NextResponse.json(output);
     } catch (error) {
        console.log("[IMAGEGENERATION_ERROR]", error);

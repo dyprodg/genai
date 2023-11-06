@@ -1,6 +1,7 @@
 import { auth } from '@clerk/nextjs';
 import { NextResponse } from 'next/server';
 import { OpenAI } from 'openai';
+import { checkApiLimit, increaseApiLimit  } from '@/lib/api-limit';
 
 interface Message {
     content: string;
@@ -33,6 +34,12 @@ export async function POST(req: Request) {
             return new NextResponse('messages are required', {status: 400});
         }
 
+        const freeTrail = await checkApiLimit();
+
+        if (!freeTrail){
+            return new NextResponse('Free trail has expired.', { status: 403})
+        }
+
         const transformedMessages: { role: 'system' | 'user', content: string }[] = [
             {
                 role: 'system',
@@ -62,6 +69,8 @@ export async function POST(req: Request) {
                 role: 'system'
             }))
         };
+
+        await increaseApiLimit();
 
         return NextResponse.json(responseData);
     } catch (error) {

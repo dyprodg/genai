@@ -15,7 +15,12 @@ const routes = sidebaritems
 //setting cn monserrat for extra font
 const monserrat = Montserrat({weight: '600', subsets:['latin']})
 
-const Sidebar = () => {
+interface SidebarProps {
+    apiLimitCount: number;
+
+}
+
+const Sidebar = ({apiLimitCount = 0}:SidebarProps) => {
 
     const pathname = usePathname()
 
