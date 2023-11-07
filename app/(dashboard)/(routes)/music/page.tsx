@@ -15,11 +15,13 @@ import { useState } from 'react';
 import { Empty } from '@/components/empty';
 import { Loader } from '@/components/loader';
 import { cn } from '@/lib/utils';
+import { useProModal } from '@/hooks/use-pro-modal';
 
 
 
 const MusicGenerationPage = () => {
 
+    const proModal = useProModal();
     const router = useRouter();
 
     type MessageType ={
@@ -49,8 +51,9 @@ const MusicGenerationPage = () => {
             setMusic(response.data.audio);
             form.reset();
         } catch (error: any) {
-            //Todo: open pro model
-            console.log(error)
+            if(error?.response?.status === 403){
+                proModal.onOpen();
+            }
         } finally {
             router.refresh();
         }

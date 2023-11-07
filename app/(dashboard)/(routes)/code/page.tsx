@@ -18,10 +18,13 @@ import { cn } from '@/lib/utils';
 import { UserAvater } from '@/components/user-avater';
 import { BotAvatar } from '@/components/bot-avatar';
 import ReactMarkdown from 'react-markdown'
+import { useProModal } from '@/hooks/use-pro-modal';
+
 
 
 const CodePage = () => {
 
+    const proModal = useProModal();
     const router = useRouter();
 
     type MessageType ={
@@ -59,8 +62,9 @@ const CodePage = () => {
             ]);
             form.reset();
         } catch (error: any) {
-            //Todo: open pro model
-            console.log(error)
+            if(error?.response?.status === 403){
+                proModal.onOpen();
+            }
         } finally {
             router.refresh();
         }

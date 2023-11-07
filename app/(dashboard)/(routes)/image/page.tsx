@@ -19,10 +19,12 @@ import { cn } from '@/lib/utils';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardFooter } from '@/components/ui/card';
 import { Download } from 'lucide-react';
+import { useProModal } from '@/hooks/use-pro-modal';
 
 
 const ImageGenerationPage = () => {
 
+    const proModal = useProModal();
     const router = useRouter();
 
     const [images, setImages] = useState<string[]>([]);
@@ -47,8 +49,9 @@ const ImageGenerationPage = () => {
             setImages(urls);
             form.reset();
         } catch (error: any) {
-            //Todo: open pro model
-            console.log(error)
+            if(error?.response?.status === 403){
+                proModal.onOpen();
+            }
         } finally {
             router.refresh();
         }
