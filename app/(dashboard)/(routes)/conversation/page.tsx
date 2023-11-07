@@ -17,10 +17,12 @@ import { Loader } from '@/components/loader';
 import { cn } from '@/lib/utils';
 import { UserAvater } from '@/components/user-avater';
 import { BotAvatar } from '@/components/bot-avatar';
+import { useProModal } from '@/hooks/use-pro-modal';
 
 
 const ConversationPage = () => {
 
+    const proModal = useProModal();
     const router = useRouter();
 
     type MessageType ={
@@ -58,8 +60,9 @@ const ConversationPage = () => {
             ]);
             form.reset();
         } catch (error: any) {
-            //Todo: open pro model
-            console.log(error)
+            if(error?.response?.status === 403){
+                proModal.onOpen();
+            }
         } finally {
             router.refresh();
         }
