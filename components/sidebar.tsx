@@ -7,6 +7,7 @@ import { Montserrat } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { sidebaritems } from "./sidebaritems";
 import { usePathname } from "next/navigation";
+import { FreeCounter } from "./free-counter";
 
 
 //imported Navitems from sidebaritems.tsx
@@ -25,7 +26,7 @@ const Sidebar = ({apiLimitCount = 0}:SidebarProps) => {
     const pathname = usePathname()
 
     return(
-        <div className="space-y-4 py-4 flex flex-col h-full bg-[#111827] text-white">
+        <div className="space-y-4 py-4 flex flex-col min-h-screen bg-[#111827] text-white">
             <div className="px-3 py-2 flex-1">
             <Link href={'/dashboard'} className="flex items-center pl-3 mb-14">
                 <div className="relative w-8 h-8 mr-4">
@@ -57,10 +58,16 @@ const Sidebar = ({apiLimitCount = 0}:SidebarProps) => {
                     </Link>
                 ))}
             </div>
-
             
             </div>
+            
+            <div className="mt-auto">
+                <FreeCounter
+                    apiLimitCount={apiLimitCount}
+                />
+            </div>
         </div>
+        
     )
 }
 
