@@ -1,3 +1,3 @@
-stripe listen --forward-to localhost:3000/api/webhook
+This is a alpa version of my AI Generation App
 
-npx prism studio
+There are lot of improvements and changes to come
