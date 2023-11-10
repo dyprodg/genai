@@ -2,6 +2,7 @@ import { auth } from '@clerk/nextjs';
 import { NextResponse } from 'next/server';
 import { OpenAI } from 'openai';
 import { checkApiLimit, increaseApiLimit  } from '@/lib/api-limit';
+import { checkSubscription } from '@/lib/subscription';
 
 interface Message {
     content: string;
@@ -35,10 +36,12 @@ export async function POST(req: Request) {
         }
 
         const freeTrail = await checkApiLimit();
+        const isPro = await checkSubscription();
 
-        if (!freeTrail){
+        if (!freeTrail && !isPro){
             return new NextResponse('Free trail has expired.', { status: 403})
         }
+
 
         const transformedMessages: { role: 'system' | 'user', content: string }[] = [
             {
@@ -70,8 +73,10 @@ export async function POST(req: Request) {
             }))
         };
 
+        if(!isPro) {
         await increaseApiLimit();
-
+        }
+        
         return NextResponse.json(responseData);
     } catch (error) {
        console.log("[CONVERSTION_ERROR]", error);

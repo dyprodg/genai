@@ -18,10 +18,11 @@ const monserrat = Montserrat({weight: '600', subsets:['latin']})
 
 interface SidebarProps {
     apiLimitCount: number;
+    isPro: boolean;
 
 }
 
-const Sidebar = ({apiLimitCount = 0}:SidebarProps) => {
+const Sidebar = ({apiLimitCount = 0 , isPro=false }:SidebarProps) => {
 
     const pathname = usePathname()
 
@@ -63,6 +64,7 @@ const Sidebar = ({apiLimitCount = 0}:SidebarProps) => {
             
             <div className="mt-auto">
                 <FreeCounter
+                    isPro={isPro}
                     apiLimitCount={apiLimitCount}
                 />
             </div>
