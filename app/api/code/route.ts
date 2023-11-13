@@ -55,10 +55,10 @@ export async function POST(req: Request) {
         ];
 
         const response = await openai.chat.completions.create({
-            model: 'gpt-4',
+            model: 'gpt-4-1106-preview',
             messages: transformedMessages,
             temperature: 0.6,
-            max_tokens: 1024,
+            max_tokens: 8192,
             top_p: 0.7,
             frequency_penalty: 0,
             presence_penalty: 0,
