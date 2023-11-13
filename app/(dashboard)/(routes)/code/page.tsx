@@ -81,6 +81,7 @@ const CodePage = () => {
             
             <div className="p-4 lg:px-8">
                 {/* Form Comp */}
+                <div className=''>
                 <div>
                 <Heading 
                 title='Code Generation'
@@ -115,7 +116,7 @@ const CodePage = () => {
                         </form>
                     </Form>
                 </div>
-
+                </div>
                 {/* Chat comp */}
                 <div className='mt-8 space-y-4 w-full'>
                     {isLoading && (
