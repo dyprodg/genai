@@ -20,6 +20,9 @@ import { BotAvatar } from '@/components/bot-avatar';
 import ReactMarkdown from 'react-markdown'
 import { useProModal } from '@/hooks/use-pro-modal';
 import toast from 'react-hot-toast';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/arta.css';
+
 
 
 
@@ -83,20 +86,20 @@ const CodePage = () => {
                 title='Code Generation'
                 description='Generate code using descriptive text'
                 icon={Code}
-                iconColor='text-green-500'
+                iconColor='text-white'
                 bgColor='bg-violet-500/10'
             />
                     <Form {...form}>
                         <form 
                         onSubmit={form.handleSubmit(onSubmit)}
-                        className='rounded-lg border w-full p-4 px-3 md:px-6 focus-within:shadow-md grid grid-cols-12 gap-2'
+                        className='rounded-lg w-full p-4 px-3 md:px-6 shadow-xl grid grid-cols-12 gap-2'
                         >
                             <FormField name='prompt'
                             render={({field}) => (
                                 <FormItem className='col-span-12 lg:col-span-10'>
                                     <FormControl className='m-0 p-0'>
                                         <Input 
-                                            className='border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent'
+                                            className='border-0 outline-none pl-2 focus-visible:ring-0 focus-visible:ring-transparent'
                                             disabled={isLoading}
                                             placeholder='Describe what your code should do here...'
                                             {...field}
@@ -105,7 +108,7 @@ const CodePage = () => {
                                 </FormItem>
                             )}/>
                             <Button 
-                            className='col-span-12 lg:col-span-2 w-full'
+                            className='col-span-12 lg:col-span-2 w-full hover:scale-105 transition ease-in-out'
                             disabled={isLoading}>
                                 Generate
                             </Button>
@@ -122,34 +125,42 @@ const CodePage = () => {
                     )}
                     {messages.length === 0 && !isLoading && (
                         <Empty 
-                            label='Waiting for your instructions'
-                            imagesource='/codegen.png'
+                            label=''
+                            imagesource='/logored.png'
                         />
                     )}
                     <div className='flex flex-col-reverse gap-y-4'>
-                        {messages.map((message) => (
+                        {messages.map((message, index) => (
                             <div 
-                                key={message.content}
+                                key={index}
                                 className={cn(
-                                    'p-8 w-full flex items-start gap-x-8 rounded-lg',
+                                    'p-8 w-full flex items-start gap-x-8 rounded-lg overflow-x-auto',
                                     message.role === 'user' ? 'bg-white border border-black/10' : 'bg-muted'
                                 )}
                             >
                                 {message.role === 'user' ? <UserAvater /> : <BotAvatar />}
-                                <ReactMarkdown 
-                                className='text-sm overflow-hidden leading-7'
-                                components={{
-                                    pre: ({node, ...props}) => (
-                                        <div className='overflow-auto w-full my-2 bg-black/10 p-2 rounded-lg'>
-                                            <pre {...props} />
-                                        </div>
-                                    ),
-                                    code: ({ node, ...props }) => (
-                                        <code className='bg-black/10 rounded-lg p-1' {...props} />
-                                    )
-                                }}
+                                
+                                <ReactMarkdown
+                                    
+                                    components={{
+                                        code({node, inline, className, children, ...props}) {
+                                            const match = /language-(\w+)/.exec(className || '')
+                                            return !inline && match ? (
+                                                <pre className={className} {...props}>
+                                                    <code 
+                                                        className={className} 
+                                                        dangerouslySetInnerHTML={{ __html: hljs.highlightAuto(String(children), [match[1]]).value }} 
+                                                    />
+                                                </pre>
+                                            ) : (
+                                                <code className={className} {...props}>
+                                                    {children}
+                                                </code>
+                                            )
+                                        },
+                                    }}
                                 >
-                                    {message.content || '' }
+                                    {message.content || ''}
                                 </ReactMarkdown>
                                 
                             </div>

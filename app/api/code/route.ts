@@ -58,7 +58,7 @@ export async function POST(req: Request) {
             model: 'gpt-4-1106-preview',
             messages: transformedMessages,
             temperature: 0.6,
-            max_tokens: 8192,
+            max_tokens: 4096,
             top_p: 0.7,
             frequency_penalty: 0,
             presence_penalty: 0,

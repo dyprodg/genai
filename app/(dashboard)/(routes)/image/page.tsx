@@ -71,20 +71,20 @@ const ImageGenerationPage = () => {
                 title='Image Generation'
                 description='Turn your words into pictures'
                 icon={ImageIcon}
-                iconColor='text-pink-500'
+                iconColor='text-white'
                 bgColor='bg-violet-500/10'
             />
                     <Form {...form}>
                         <form 
                         onSubmit={form.handleSubmit(onSubmit)}
-                        className='rounded-lg border w-full p-4 px-3 md:px-6 focus-within:shadow-md grid grid-cols-12 gap-2'
+                        className='rounded-lg w-full p-4 px-3 md:px-6 shadow-xl grid grid-cols-12 gap-2'
                         >
                             <FormField name='prompt'
                             render={({field}) => (
                                 <FormItem className='col-span-12 lg:col-span-6'>
                                     <FormControl className='m-0 p-0'>
                                         <Input 
-                                            className='border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent'
+                                            className='border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent pl-2'
                                             disabled={isLoading}
                                             placeholder='Describe the picture you want...'
                                             {...field}
@@ -129,7 +129,7 @@ const ImageGenerationPage = () => {
 
                             {/* Generate Button */}
                             <Button 
-                            className='col-span-12 lg:col-span-2 w-full'
+                            className='col-span-12 lg:col-span-2 w-full hover:scale-105 transition ease-in-out'
                             disabled={isLoading}>
                                 Generate
                             </Button>

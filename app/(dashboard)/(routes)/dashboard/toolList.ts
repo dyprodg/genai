@@ -9,13 +9,6 @@ export const toolList = [
         href: '/conversation'
     },
     {
-        label: 'Music Generation',
-        icon: Music,
-        color: 'text-orange-500',
-        bgColor: 'bg-violet-500/10',
-        href: '/music'
-    },
-    {
         label: 'Code Generation',
         icon: Code,
         color: 'text-green-500',
@@ -29,11 +22,4 @@ export const toolList = [
         bgColor: 'bg-violet-500/10',
         href: '/image'
     },
-    {
-        label: 'Video Generation',
-        icon: Video,
-        color: 'text-emerald-500',
-        bgColor: 'bg-violet-500/10',
-        href: '/video'
-    }
 ]

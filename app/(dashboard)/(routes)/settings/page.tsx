@@ -12,11 +12,11 @@ const SettingsPage = async () => {
                 title="Settings"
                 description="Manage account settings."
                 icon={Settings}
-                iconColor="text-gray-700"
-                bgColor="bg-gray-700/10"
+                iconColor="text-white"
+                bgColor="bg-transparent"
             />
             <div className="px-4 lg:px-8 space-y-4">
-                <div className="text-muted-foreground text-sm">
+                <div className="text-white text-sm">
                     {isPro ? "You are currently on a pro plan." : "You are currently on a free plan"}
                 </div>
                 <SubscriptionButton isPro={isPro}/>

@@ -14,7 +14,7 @@ const DashboardLayout = async ({
 
 
     return (
-        <div className="h-full relative">
+        <div className="h-full relative bg-gradient-to-t from-indigo-400 via-violet-900 to-purple-500">
             <div className="hidden h-full md:flex md:w-72 md:flex-col md:fixed md:inset-y-0 bg-gray-900">
                 <div>
                     <Sidebar 
