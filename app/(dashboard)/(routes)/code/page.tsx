@@ -142,27 +142,28 @@ const CodePage = () => {
                                 {message.role === 'user' ? <UserAvater /> : <BotAvatar />}
                                 
                                 <ReactMarkdown
-                                    
                                     components={{
-                                        code({node, inline, className, children, ...props}) {
-                                            const match = /language-(\w+)/.exec(className || '')
-                                            return !inline && match ? (
-                                                <pre className={className} {...props}>
-                                                    <code 
-                                                        className={className} 
-                                                        dangerouslySetInnerHTML={{ __html: hljs.highlightAuto(String(children), [match[1]]).value }} 
-                                                    />
-                                                </pre>
-                                            ) : (
-                                                <code className={className} {...props}>
-                                                    {children}
-                                                </code>
-                                            )
+                                        // Use 'any' to bypass TypeScript checks for the 'inline' prop
+                                        code: ({ node, className, children, ...props }: any) => {
+                                        const match = /language-(\w+)/.exec(className || '');
+                                        return !props.inline && match ? (
+                                            <pre className={className} {...props}>
+                                            <code 
+                                                className={className} 
+                                                dangerouslySetInnerHTML={{ __html: hljs.highlightAuto(String(children), [match[1]]).value }} 
+                                            />
+                                            </pre>
+                                        ) : (
+                                            <code className={className} {...props}>
+                                            {children}
+                                            </code>
+                                        );
                                         },
                                     }}
-                                >
+                                    >
                                     {message.content || ''}
-                                </ReactMarkdown>
+                                    </ReactMarkdown>
+
                                 
                             </div>
                         ))}
