@@ -87,8 +87,8 @@ const CodePage = () => {
                 title='Code Generation'
                 description='Generate code using descriptive text'
                 icon={Code}
-                iconColor='text-white'
-                bgColor='bg-violet-500/10'
+                iconColor='text-emerald-500'
+                bgColor='bg-black/70'
             />
                     <Form {...form}>
                         <form 

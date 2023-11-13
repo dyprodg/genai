@@ -71,8 +71,8 @@ const ImageGenerationPage = () => {
                 title='Image Generation'
                 description='Turn your words into pictures'
                 icon={ImageIcon}
-                iconColor='text-white'
-                bgColor='bg-violet-500/10'
+                iconColor='text-pink-500'
+                bgColor='bg-black/70'
             />
                     <Form {...form}>
                         <form 
@@ -146,8 +146,8 @@ const ImageGenerationPage = () => {
                     )}
                     {images.length === 0 && !isLoading && (
                         <Empty 
-                            label='No images generated yet'
-                            imagesource='/images.png'
+                            label=''
+                            imagesource='/logored.png'
                         />
                     )}
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-8'>

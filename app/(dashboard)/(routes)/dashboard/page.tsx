@@ -15,11 +15,11 @@ const DashboardPage = () => {
 
     return(
         <div>
-            <div className="mb-8 space-x-4">
+            <div className="mb-8 space-x-4 text-white">
                 <h2 className="text-2xl md:text-4xl font-bold text-center">
                     Explore the power of AI
                 </h2>
-                <p className="text-muted-foreground font-light text-sm md:text-lg text-center">
+                <p className="text-white/60 font-light text-sm md:text-lg text-center">
                     Pick the jusiest AI tool from the Tree in AIOrchard
                 </p>
             </div>

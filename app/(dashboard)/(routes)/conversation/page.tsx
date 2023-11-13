@@ -81,8 +81,8 @@ const ConversationPage = () => {
                 title='Conversation'
                 description='Our most advanced text generation AI'
                 icon={MessageSquare}
-                iconColor='text-white'
-                bgColor='bg-gray-500/10'
+                iconColor='text-purple-500'
+                bgColor='bg-black/70'
             />
                     <Form {...form}>
                         <form 

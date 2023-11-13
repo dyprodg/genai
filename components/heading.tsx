@@ -22,7 +22,7 @@ export const Heading = ({title, description, icon: Icon, iconColor, bgColor}: He
                     <h2 className="text-3xl lg:text-5xl text-white font-bold">
                         {title}
                     </h2>
-                    <p className="text-sm lg:text-lg text-white">
+                    <p className="text-sm lg:text-lg text-white/60">
                         {description}
                     </p>
                 </div>
