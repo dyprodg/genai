@@ -20,7 +20,8 @@ export const LandingHero = () => {
                                 'Code Generation.',
                             ],
                             autoStart: true,
-                            loop: true
+                            loop: true,
+                            
                         }}
                     />
                 </div>
@@ -29,7 +30,7 @@ export const LandingHero = () => {
                 </div>
                 <div>
                     <Link href={isSignedIn ? '/dashboard' : '/sign-up'}>
-                       <Button variant='premium' className="md:text-lg p-4 md:p-6 rounded-full font-semibold">
+                       <Button variant='premium' className="md:text-lg p-4 md:p-6 rounded-full font-semibold  hover:scale-105 hover:shadow-md transition ease-in-out animate-bounce active:animate-ping">
                             Start Generating For Free
                        </Button>
                     </Link>

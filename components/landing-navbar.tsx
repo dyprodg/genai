@@ -26,13 +26,13 @@ export const LandingNavbar = () => {
                         src='/logo.png'
                     />
                 </div>
-                <h1 className={cn('text-2xl font-bold text-white', font.className)}>
+                <h1 className={cn('text-3xl font-bold text-white', font.className)}>
                     AIOrchard
                 </h1>
             </Link>
             <div className='flex items-center gap-x-2'>
                 <Link href={isSignedIn ? '/dashboard' :'/sign-up'}>
-                    <Button variant='outline' className='rounded-full'>
+                    <Button variant='outline' className='rounded-full hover:scale-105 hover:shadow-md transition ease-in-out'>
                         Get Started
                     </Button>
                 </Link>
