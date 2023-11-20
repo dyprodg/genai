@@ -33,6 +33,7 @@
     "react-hot-toast": "^2.4.1",
     "react-markdown": "^9.0.0",
     "replicate": "^0.20.1",
+    "sharp": "^0.32.6",
     "stripe": "^14.3.0",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
