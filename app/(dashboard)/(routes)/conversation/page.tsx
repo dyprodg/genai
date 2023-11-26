@@ -19,6 +19,7 @@ import { UserAvater } from '@/components/user-avater';
 import { BotAvatar } from '@/components/bot-avatar';
 import { useProModal } from '@/hooks/use-pro-modal';
 import toast from 'react-hot-toast';
+import { Textarea } from '@/components/ui/textarea';
 
 
 const ConversationPage = () => {
@@ -93,8 +94,9 @@ const ConversationPage = () => {
                             render={({field}) => (
                                 <FormItem className='col-span-12 lg:col-span-10'>
                                     <FormControl className='m-0 p-0'>
-                                        <Input 
-                                            className='pl-2 border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent'
+                                        <Textarea
+                                            className='p-2 border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent resize-none w-full'
+                                            rows={4}
                                             disabled={isLoading}
                                             placeholder='Type your message here...'
                                             {...field}

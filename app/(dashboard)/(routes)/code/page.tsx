@@ -22,6 +22,7 @@ import { useProModal } from '@/hooks/use-pro-modal';
 import toast from 'react-hot-toast';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/arta.css';
+import { Textarea } from '@/components/ui/textarea';
 
 
 
@@ -99,10 +100,11 @@ const CodePage = () => {
                             render={({field}) => (
                                 <FormItem className='col-span-12 lg:col-span-10'>
                                     <FormControl className='m-0 p-0'>
-                                        <Input 
-                                            className='border-0 outline-none pl-2 focus-visible:ring-0 focus-visible:ring-transparent'
+                                    <Textarea
+                                            className='p-2 border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent resize-none w-full'
+                                            rows={4}
                                             disabled={isLoading}
-                                            placeholder='Describe what your code should do here...'
+                                            placeholder='Type your message here...'
                                             {...field}
                                         />
                                     </FormControl>
