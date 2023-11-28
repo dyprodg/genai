@@ -8,7 +8,6 @@ import { useForm } from "react-hook-form";
 import { formSchema } from './constants';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -88,7 +87,7 @@ const ConversationPage = () => {
                     <Form {...form}>
                         <form 
                         onSubmit={form.handleSubmit(onSubmit)}
-                        className='rounded-lg w-full p-4 px-3 md:px-6 shadow-xl grid grid-cols-12 gap-2'
+                        className='rounded-lg w-full p-4 px-3 md:px-6 shadow-xl grid grid-cols-12 gap-2 items-center'
                         >
                             <FormField name='prompt'
                             render={({field}) => (

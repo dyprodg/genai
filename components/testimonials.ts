@@ -14,13 +14,13 @@ export const testimonials = [
     {
       name: "Mark",
       avatar: "M",
-      title: "CEO",
+      title: "Free Lancer",
       description: "This app has changed my life, cannot imagine working without it!",
     },
     {
       name: "Mary",
       avatar: "M",
-      title: "CFO",
+      title: "Book Writer",
       description: "The best in class, definitely worth the premium subscription!",
     },
   ];
